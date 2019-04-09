@@ -1,0 +1,444 @@
+SQL> create table team(team_id number(10) primary key,name varchar2(50),coach varchar2(100),captain
+varchar2(100));
+
+SQL> create table player(player_id number(10) primary key,name varchar2(100),dob date,role varchar2(
+ 50),team_id number(10),foreign key(team_id) references team(team_id));
+
+SQL> create table stadium(stadium_id number(10) primary key,match_id number(10),name varchar2(300),venue varchar
+2(10),capacity number(10));
+
+SQL> create table matches(match_id number(10) primary key,team1_id number(10),te
+am2_id number(10),outcome varchar2(10),playing_date date,foreig
+n key(team1_id) references team(team_id),foreign key(team2_id) references team(team_id));
+
+alter table stadium add constraint match_id foreign key(match_id) references match(match_id);
+
+SQL> create table powerplay_runrate(match_id number(10),team_id number(10),p1 number(3,2),p2 number(
+3,2),p3 number(3,2),foreign key(match_id) references match(match_id),foreign key(team_id) references
+ team(team_id));
+
+SQL> create table batsman(batsman_id number(10) primary key,player_id number(10),
+foreign key(player_id) references player(player_id));
+
+SQL> create table batsman_milestones(batsman_id number(10),fifties number(5),hundreds number(5),fore
+ign key(batsman_id) references batsman(batsman_id));
+
+SQL> create table batsman_stats(batsman_id number(10),sr number(10),avg number(10),foreign key(batsm
+an_id) references batsman(batsman_id));
+
+SQL> create table batsman_innings(batsman_id number(10),match_id number(10),runs number(10),balls number(10),boundaries number(10),foreign key(batsman_id) references batsman(batsman_id),foreign key(match_id) references match(match_id));
+
+SQL> create table batsman_boundaries(batsman_id number(10),match_id number(10),fours number(10),sixe
+s number(10),foreign key(batsman_id) references batsman(batsman_id),foreign key(match_id) references
+ match(match_id));
+
+SQL> create table bowler(bowler_id number(10) primary key,player_id number(10),fo
+reign key(player_id) references player(player_id));
+
+SQL> create table bowler_milestones(bowler_id number(10),five_wicket_hauls number(10),maiden_overs n
+umber(10),foreign key(bowler_id) references bowler(bowler_id));
+
+
+SQL> create table bowler_stats(bowler_id number(10),sr number(10),avg number(10),foreign key(bowler_
+id) references bowler(bowler_id));
+
+SQL> create table bowler_innings(bowler_id number(10),match_id number(10),balls number(10),runs numb
+er(10),wickets number(10),foreign key(bowler_id) references bowler(bowler_id),foreign key(match_id) 
+references match(match_id));
+
+SQL> create table bowler_wickets(bowler_id number(10),match_id number(10),caught number(10),stumped 
+number(10),bold number(10),foreign key(bowler_id) references bowler(bowler_id),foreign key(match_id)
+references match(match_id));
+
+
+SQL> insert into team values(10,'India','Ravi Shastri','Virat Kohli');
+
+1 row created.
+
+SQL>  insert into team values(20,'Australia','Darren Lehmanm','Steve Smith');
+
+1 row created.
+
+
+SQL> insert into player values(100,'Virat Kohli','5-NOV-1988','batsman',10);
+
+1 row created.
+
+SQL> insert into player values(101,'Rohit Sharma','1987-04-30','batsman',10);
+
+1 row created.
+
+SQL> insert into player values(102,'Manish Pandey','1989-09-10','batsman',10);
+
+1 row created.
+
+SQL> insert into player values(103,'Kedar Jadhav','1985-03-26','batsman',10);
+
+1 row created.
+
+SQL> insert into player values(104,'Ajinkya Rahane','1988-06-06','batsman',10);
+
+1 row created.
+
+SQL> insert into player values(105,'Hardik Pandya','1993-10-11','all-rounder',10);
+
+1 row created.
+
+SQL> insert into player values(106,'Ravindra Jadeja','1988-12-06','all-rounder',10);
+
+1 row created.
+
+SQL> insert into player values(107,'Lokesh Rahul','1992-04-18','wk-batsman',10);
+
+1 row created.
+
+SQL> insert into player values(108,'MS Dhoni','1981-06-07','wk-batsman',10);
+
+1 row created.
+
+SQL> insert into player values(109,'Kuldeep Yadav','1994-12-14','bowler',10);
+
+1 row created.
+
+SQL> insert into player values(110,'Yuzvendra Chahal','1990-07-23','bowler',10);
+
+1 row created.
+
+SQL> 
+
+SQL> insert into player values(111,'Jasprit Bumrah','1993-12-06','bowler',10);
+
+1 row created.
+
+SQL> insert into player values(112,'Bhuvneshwar Kumar','1990-02-05','bowler',10);
+
+1 row created.
+
+SQL> insert into player values(113,'Umesh Yadav','1987-10-25','bowler',10);
+
+1 row created.
+
+SQL> insert into player values(114,'Mohammed Shami','1990-03-09','bowler',10);
+
+1 row created.
+
+SQL> insert into player values(115,'Axar Patel','1994-01-20','all-rounder',10);
+
+1 row created.
+
+SQL> insert into player values(200,'Steve Smith','1989-06-02','batsman',20);
+
+1 row created.
+
+SQL> insert into player values(201,'David Warner','1986-10-27','batsman',20);
+
+1 row created.
+
+SQL> insert into player values(202,'Peter Handscomb','1991-04-26','batsman',20);
+
+1 row created.
+
+SQL> insert into player values(203,'Aaron Finch','1986-11-17','batsman',20);
+
+1 row created.
+
+SQL> insert into player values(204,'Hilton Cartwright','1992-02-14','all-rounder',20);
+
+1 row created.
+
+SQL> insert into player values(205,'Glenn Maxwell','1988-10-14','all-rounder',20);
+
+1 row created.
+
+SQL> insert into player values(206,'Marcus Stoinis','1989-08-16','all-rounder',20);
+
+1 row created.
+
+SQL> insert into player values(207,'Ashton Agar','1993-10-14','all-rounder',20);
+
+1 row created.
+
+SQL> insert into player values(208,'James Faulkner','1990-04-29','all-rounder',20);
+
+1 row created.
+
+SQL> insert into player values(209,'Matthew Wade','1987-12-26','wk-batsman',20);
+
+1 row created.
+
+SQL> insert into player values(210,'Travis Head','1993-12-29','wk-batsman',20);
+
+1 row created.
+
+SQL> insert into player values(211,'Nathan Coulter-Nile','1987-10-11','bowler',20);
+
+1 row created.
+
+SQL> insert into player values(212,'Pat-Cummins','1993-05-08','bowler',20);
+
+1 row created.
+
+SQL> insert into player values(213,'Adam Zampa','1992-03-31','bowler',20);
+
+1 row created.
+
+SQL>  insert into player values(214,'Kane Richardson','1991-02-12','bowler',20);
+
+1 row created.
+
+
+
+SQL> insert into stadium values(120,1,'MA Chidambaram Stadium','Chennai',50000);
+
+1 row created.
+
+SQL> insert into stadium values(121,2,'Eden Gardens','Kolkata',90000);
+
+1 row created.
+
+SQL> insert into stadium values(122,3,'Holkar Cricket Stadium','Indore',30000);
+
+1 row created.
+
+SQL> insert into stadium values(123,4,'M Chinnaswamy Stadium','Bengaluru',40000);
+
+1 row created.
+
+SQL> insert into stadium values(124,5,'Vidarbha Cricket Association Ground','Nagpur',45000);
+
+1 row created.
+
+
+SQL> insert into matches values(1,10,20,'India','2017-09-17');
+
+1 row created.
+
+SQL> insert into matches values(2,10,20,'India','2017-09-21');
+
+1 row created.
+
+SQL> insert into matches values(3,10,20,'India','2017-09-24');
+
+1 row created.
+
+SQL> insert into matches values(4,10,20,'Australia','2017-09-28');
+
+1 row created.
+
+SQL> insert into matches values(5,10,20,'India','2017-10-01');
+
+1 row created.
+
+
+SQL> insert into powerplay_runrate values(1,10,3.4,5.46,8.3);
+
+1 row created.
+
+SQL> insert into powerplay_runrate values(1,20,3.75,7.23,7.00);
+
+1 row created.
+
+SQL> insert into powerplay_runrate values(2,10,4.4,5.43,4.5);
+
+1 row created.
+
+SQL> insert into powerplay_runrate values(2,20,4.7,4.5,2.0);
+
+1 row created.
+
+SQL> insert into powerplay_runrate values(3,20,4.9,6.16,5.9);
+
+1 row created.
+
+SQL> insert into powerplay_runrate values(3,10,6.8,5.73,5.4);
+
+1 row created.
+
+SQL> insert into powerplay_runrate values(4,20,6.3,6.16,8.6);
+
+1 row created.
+
+SQL> insert into powerplay_runrate values(4,10,6.5,5.83,7.3);
+insert into powerplay_runrate values((4,10,6.5,5.83,7.3)
+                                       *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> insert into powerplay_runrate values(4,10,6.5,5.83,7.3);
+
+1 row created.
+
+SQL> insert into powerplay_runrate values(5,20,6.0,4.3,5.2);
+
+1 row created.
+
+SQL> insert into powerplay_runrate values(5,10,4.3,6.26,4.0);
+
+1 row created.
+
+
+SQL> insert into batsman values(1000,100);
+
+1 row created.
+
+SQL> insert into batsman values(1001,101);
+
+1 row created.
+
+SQL> insert into batsman values(1002,102);
+
+1 row created.
+
+SQL> insert into batsman values(1003,103);
+
+1 row created.
+
+SQL> insert into batsman values(1004,104);
+
+1 row created.
+
+SQL> insert into batsman values(1005,105);
+
+1 row created.
+
+SQL> insert into batsman values(1006,106);
+
+1 row created.
+
+SQL> insert into batsman values(1007,107);
+
+1 row created.
+
+SQL> insert into batsman values(1008,108);
+
+1 row created.
+
+SQL> insert into batsman values(1009,115);
+
+1 row created.
+
+SQL> insert into batsman values(1010,200);
+
+1 row created.
+
+SQL> insert into batsman values(1011,201);
+
+1 row created.
+
+SQL> insert into batsman values(1012,202);
+
+1 row created.
+
+SQL> insert into batsman values(1013,203);
+
+1 row created.
+
+SQL> insert into batsman values(1014,204);
+
+1 row created.
+
+SQL> insert into batsman values(1015,205);
+
+1 row created.
+
+SQL> insert into batsman values(1016,206);
+
+1 row created.
+
+SQL> insert into batsman values(1017,207);
+
+1 row created.
+
+SQL> insert into batsman values(1018,208);
+
+1 row created.
+
+SQL> insert into batsman values(1019,209);
+
+1 row created.
+
+SQL> insert into batsman values(1020,210);
+
+1 row created.
+
+
+SQL> insert into bowler values(2000,109);
+
+1 row created.
+
+SQL> insert into bowler values(2001,110);
+
+1 row created.
+
+SQL> insert into bowler values(2002,111);
+
+1 row created.
+
+SQL> insert into bowler values(2003,112);
+
+1 row created.
+
+SQL> insert into bowler values(2004,113);
+
+1 row created.
+
+SQL> insert into bowler values(2005,114);
+
+1 row created.
+
+SQL> insert into bowler values(2006,105);
+
+1 row created.
+
+SQL> insert into bowler values(2007,106);
+
+1 row created.
+
+SQL> insert into bowler values(2008,115);
+
+1 row created.
+
+SQL> insert into bowler values(2009,211);
+
+1 row created.
+
+SQL> insert into bowler values(2010,212);
+
+1 row created.
+
+SQL> insert into bowler values(2011,213);
+
+1 row created.
+
+SQL> insert into bowler values(2012,214);
+
+1 row created.
+
+SQL> insert into bowler values(2013,204);
+
+1 row created.
+
+SQL> insert into bowler values(2014,205);
+
+1 row created.
+
+SQL> insert into bowler values(2015,206);
+
+1 row created.
+
+SQL> insert into bowler values(2016,207);
+
+1 row created.
+
+SQL> insert into bowler values(2017,208);
+
+1 row created.
+
+insert into batsman_stats(batsman_id,sr,avg) select batsman_id,(sum(runs)/sum(balls))*100,sum(runs)/count(match_id) from batsman_innings where batsman_id=1000;
+
+insert into batsman_milestones(batsman_id,fifties) select batsman_id,count(runs) from batsman_innings where runs>=50 and batsman_id=1000;
+
+insert into bowler_stats(bowler_id,sr,avg) select bowler_id,sum(balls)/sum(wickets),sum(runs)/sum(wickets) from bowler_innings where bowler_id=2000;
+
+insert into bowler_milestones(bowler_id,five_wicket_hauls) select bowler_id,count(wickets) from bowler_innings where wickets>=5 and bowler_id=2000;
